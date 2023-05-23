@@ -1,80 +1,22 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <title>Smart Evaluator</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <h1>Smart Evaluator</h1>
-
-  <form id="expression-form">
-    <input type="text" id="expression-input" placeholder="Enter expression" />
-    <button type="submit">Evaluate</button>
+	<!-- the entire body must be written by student -->
+	 <h1>Smart Evaluator</h1>
+	<form>
+		<label for="expression">Expression:</label>
+		<input type="text" id="expression" name="expression">
+		<button type="button" onclick="evaluateExpression()">Evaluate</button>
   </form>
+    <script type="text/javascript" src="./script.js">
+</script>
 
-  <div id="result"></div>
-
-  <script>
-    class OutOfRangeError extends Error {
-      constructor() {
-        super();
-        this.name = this.constructor.name;
-        this.message = "Expression should only consist of integers and +-/* characters and not <arg>";
-      }
-    }
-
-    class InvalidExprError extends Error {
-      constructor() {
-        super();
-        this.name = this.constructor.name;
-        this.message = "Expression should not have an invalid combination of operators";
-      }
-    }
-
-    function evalString(expression) {
-      try {
-        if (/([+/*-])\1/.test(expression)) {
-          throw new InvalidExprError();
-        }
-
-        if (/^[+/*]/.test(expression)) {
-          throw new SyntaxError("Expression should not start with an invalid operator");
-        }
-
-        if (/[+/*-]$/.test(expression)) {
-          throw new SyntaxError("Expression should not end with an invalid operator");
-        }
-
-        // Perform evaluation logic here
-        // ...
-
-        return "Valid expression: " + expression; // Placeholder return value
-
-      } catch (error) {
-        if (error instanceof OutOfRangeError || error instanceof InvalidExprError) {
-          throw error;
-        } else {
-          throw new OutOfRangeError();
-        }
-      }
-    }
-
-    const form = document.getElementById('expression-form');
-    const resultDiv = document.getElementById('result');
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      resultDiv.textContent = '';
-
-      const expressionInput = document.getElementById('expression-input');
-      const expression = expressionInput.value.trim();
-
-      try {
-        const result = evalString(expression);
-        resultDiv.textContent = result;
-      } catch (error) {
-        resultDiv.textContent = error.name + ": " + error.message;
-      }
-    });
-  </script>
 </body>
+
 </html>
